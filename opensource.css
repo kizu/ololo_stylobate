@@ -1,0 +1,118 @@
+@media screen {
+    .full {width: 1024px;height: 768px;}
+    .list .slide:before {height: 384px;}
+}
+.slide {
+    width: 1024px;
+    height: 768px;
+}
+.slide>div {
+    width: 784px;
+    height: 697px;
+}
+
+.slide.cover {
+    background: #FFF;
+}
+
+.progress {
+    display: none;
+}
+
+#thanks ul {
+    margin-top: 360px;
+    margin-left: -30px;
+}
+
+.demo-cover h2 {
+    position: relative;
+    z-index: 9;
+    pointer-events: none;
+}
+.demo-cover h2 a {
+    pointer-events: all;
+}
+
+.slide#thanks h2,
+.slide#cover h2 {
+    left: 100px;
+}
+.slide#cover .info {
+    left: 105px;
+}
+
+.slide > div {
+    z-index: 1;
+}
+
+.full .slide:not(.active) img {
+    display: none;
+}
+
+.next .overlay {
+    z-index: -1;
+    opacity: 0.2;
+    -webkit-transition: opacity 0.4s, z-index 0.4s;
+}
+
+.full .next .overlay {
+    opacity: 1;
+    visibility: visible;
+    z-index: 1;
+}
+.full .next.active .overlay {
+    opacity: 0.2;
+    z-index: -1;
+}
+
+#pull-requests .next .overlay {
+    -webkit-transition: opacity 0.8s, z-index 0.8s, top 0.8s;
+    width: 100%;
+}
+.full #pull-requests .next.active .overlay {
+    top: -600px;
+}
+.slide#thanks, .slide#cover {background-size:100% 100%}
+.list .lol.next {
+    display: none;
+}
+.full .lol.next {
+   visibility: visible !important;
+   -webkit-transform-origin: 0 100%;
+   -webkit-transition: -webkit-transform 0.4s;
+   -webkit-transform: scale(1) !important;
+}
+.full .lol.next.active {
+   -webkit-transform: scale(1.9) !important;
+}
+
+@page{
+    size: 1024px 768px;
+}
+
+
+.place img {
+    max-width: 100%;
+}
+
+
+.slide ol, .slide ul {
+    font-size: 1.3em;
+    margin-top: 2em;
+}
+.slide ol li, .slide ul li {
+    text-indent: 0;
+    line-height: 1.5;
+    margin-bottom: 1em;
+}
+.slide ol li:before,
+.slide ul li:before {
+    width: 2em;
+    margin-left: -2em;
+}
+
+#thanks.slide ol,
+#thanks.slide ul {
+    font-size: 1.2em;
+    margin-top: 410px !important;
+}

@@ -1,0 +1,94 @@
+<!DOCTYPE HTML>
+
+
+<html lang="ru">
+<head>
+    <title>Don’t look into the source</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=1024, user-scalable=no">
+    <link rel="stylesheet" href="themes/yandex/styles/screen.css">
+    
+</head>
+<body class="list">
+    <header class="caption">
+        <h1>Don’t look into the source</h1>
+        <p><a href="http://kizu.ru/en/">Roman Komarov</a>, <a href="http://yandex.ru/">Яндекс</a></p>
+
+    </header>
+
+    <section id="dont-look-into-the-source" class="slide cover"><div><h2>Don’t look into the source</h2>
+
+</div></section>
+<section class="slide" id="hello"><div><h2>Hello</h2>
+
+<p>Hi there</p>
+
+<script>
+
+function get_fs(el) {
+    return parseFloat(document.defaultView.getComputedStyle(el,null)
+                               .getPropertyValue('font-size'));
+}
+
+function fix_contents(el) {
+    var inner = el.getElementsByClassName('inner')[0];
+    // Reset the styles
+    inner.style.fontSize = "1em";
+    inner.style.webkitTransform = 'scale(1)';
+
+    var initial_fs = get_fs(el);
+    var modifier = el.offsetWidth / inner.offsetWidth;
+    var new_fs = initial_fs * modifier;
+    inner.style.fontSize = new_fs + "px";
+
+    // If browser don't support fractional font-size,
+    // then round the font-size down and resize
+    // using transform, if possible
+    if (get_fs(inner) % 1 === 0 ) {
+        inner.style.fontSize = Math.floor(new_fs) + "px";
+        modifier = el.offsetWidth / inner.offsetWidth;
+        inner.style.webkitTransform = 'scale(' + modifier + ')';
+    }
+    
+}
+
+var els = document.getElementsByClassName('test');
+
+function check_size() {
+    console.log(arguments);
+    Array.prototype.forEach.call(els, fix_contents);
+}
+
+check_size();
+
+window.onresize = function(event) {
+    check_size();
+}
+
+// Events for contenteditable, not that needed anyway
+Array.prototype.forEach.call(els, add_edit_listener);
+
+function add_edit_listener(el) {
+    // Should fix it to use the function that would check
+    // only the changed element, not all of them.
+    if (el.addEventListener) {
+        el.addEventListener("input", check_size, false);
+        el.addEventListener("DOMNodeInserted", check_size, false);
+        el.addEventListener("DOMNodeRemoved", check_size, false);
+        el.addEventListener("DOMCharacterDataModified", check_size, false);
+    }
+}
+
+</script>
+
+</div></section>
+
+    
+    <div class="progress"><div></div></div>
+    <script src="shower/shower.js"></script>
+    <!-- Copyright © 2014 Roman Komarov — http://kizu.ru/en/, Яндекс — http://yandex.ru/ -->
+
+
+
+</body>
+</html>

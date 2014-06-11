@@ -1,0 +1,190 @@
+<!DOCTYPE HTML>
+
+
+<html lang="ru">
+<head>
+    <title>Стилобат</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=1024, user-scalable=no">
+    <link rel="stylesheet" href="themes/yandex/styles/screen.css">
+    
+</head>
+<body class="list">
+    <header class="caption">
+        <h1>Стилобат</h1>
+        <p><a href="http://kizu.ru/">Роман Комаров</a>, <a href="https://mail.yandex.ru/">Яндекс.Почта</a></p>
+
+    </header>
+
+    <section id="splash" class="slide cover"><div><h2><span>Яндекс</span></h2>
+
+</div></section>
+<section class="slide shout" id="cover"><div><h2><span class="inner">Стилобат</span></h2>
+
+<div class="info">
+    <p class="author">Роман Комаров</p>
+    <p class="author">2014</p>
+</div>
+
+</div></section>
+<section class="slide" id="section"><div><h2>Что такое «Стилобат»?</h2>
+
+<p>Фреймворк для написания сложных миксинов на Стайлусе.</p>
+
+<ol>
+  <li>Позволяет отделить стили от селекторов и жёсткой HTML-структуры.</li>
+  <li>Позволяет разделить стили на общие и специфичные для компании.</li>
+  <li>Позволяет создавать гибкие и расширяемые миксины.</li>
+</ol>
+
+</div></section>
+<section class="slide shout" id="section-1"><div><h2>Использование</h2>
+
+</div></section>
+<section class="slide" id="section-2"><div><h2>Использование</h2>
+
+<p>Миксины стилобата маскируются под обычные CSS-свойства и значения.</p>
+
+<ul>
+  <li>Псевдо-свойство <code>kind</code> — «кайнды», общие для любых сайтов паттерны вёрстки.</li>
+  <li>Псевдо-свойство <code>skin</code> — «скины», стили для конкретного сайта, в нашем случае — реализация островного дизайна (версии 2.0).</li>
+</ul>
+
+</div></section>
+<section class="slide" id="section-3"><div><h2>Использование: пример</h2>
+
+<pre><code>.nb-button</code><code>  <mark>kind</mark>: button <mark class="comment">// Кайнд</mark></code><code> </code><code>._nb-normal-button</code><code>  <mark>skin</mark>: button <mark class="comment">// Скин</mark></code><code> </code><code>._nb-small-button</code><code>  skin: button <mark>small</mark> <mark class="comment">// Скин с параметром</mark></code></pre>
+
+</div></section>
+<section class="slide" id="section-4"><div><h2>Использование: правила</h2>
+
+<ol>
+  <li>
+    <p>Первое ключевое слово — название кайнда/скина.</p>
+
+    <pre><code> skin: <mark>foo</mark> bar baz 10px</code></pre>
+  </li>
+  <li>
+    <p>Всё последующее — параметры:</p>
+
+    <pre><code> skin: foo <mark>bar baz 10px</mark></code></pre>
+  </li>
+</ol>
+
+</div></section>
+<section class="slide" id="section-5"><div><h2>Использование: параметры</h2>
+
+<ol>
+  <li>Ключевые слова: <code>small</code>, <code>inline</code> и т.д.</li>
+  <li>Обычные CSS-значения: <code>10px</code>, <code>#FFF</code>.</li>
+  <li>Именованные п-ры: <code>(offset-y -6px)</code>,  <code>(size 10px 20px)</code>.</li>
+  <li>Элементы: <code>(-helper '&amp; &gt; .arrow-tail')</code>.</li>
+  <li>Модификаторы: <code>(_underline '&amp;:hover')</code>.</li>
+</ol>
+
+</div></section>
+<section class="slide" id="section-6"><div><h2>Использование: именованные параметры</h2>
+
+<ul>
+  <li>Элементы и модификаторы — подвид именованных параметров.</li>
+  <li>
+    <p>Первое слово в скобках — имя параметра. Остальные — аргументы.</p>
+
+    <pre style="margin: -30px 0 0;"><code>  (size <mark>10px 20px</mark>)
+</code></pre>
+  </li>
+  <li>
+    <p>Если аргумент элемента или модификатора — строка, это селектор, к которому нужно его применить.</p>
+
+    <pre style="margin: -30px 0 0;"><code>  (-helper '<mark>&amp; &gt; .arrow-tail</mark>')
+</code></pre>
+  </li>
+</ul>
+
+</div></section>
+<section class="slide" id="section-7"><div><h2>Использование: умолчания</h2>
+
+<p>Элементы и модификаторы могут применяться по умолчанию. Элементы — часто могут применяться к псевдоэлементу.</p>
+
+<p>Чтобы не использовать умолчание для элемента или модификатора, в качестве селектора нужно передать пустую строку:</p>
+
+<pre><code>(-helper <mark>''</mark>)</code></pre>
+
+</div></section>
+<section class="slide" id="section-8"><div><h2>Использование: через запятую</h2>
+
+<p>Если нужно применить несколько кайндов или скинов, их можно записать через запятую:</p>
+
+<pre><code>kind:</code><code>    shrink,</code><code>    ellipsis</code></pre>
+
+</div></section>
+<section class="slide" id="section-9"><div><h2>Использование: неймспейсы</h2>
+
+<p>Названия скинов могут быть составными: <code>skin: islands-button</code>, но чтобы каждый раз не писать <code>islands-</code> можно использовть неймспейс:</p>
+
+<pre><code>set-skin-namespace('<mark>islands</mark>')</code><code>@import "skins/islands"</code><code>.button</code><code>  <mark>skin: button</mark></code></pre>
+
+</div></section>
+<section class="slide" id="section-10"><div><h2>Готовые кайнды и скины</h2>
+
+<ul>
+  <li>
+    <p><a href="http://stylobate.github.io/ru/kinds/">«Кайнды»</a> — стандартная библиотека стилобата.</p>
+  </li>
+  <li>
+    <p><a href="http://yandex-ui.github.io/stylobate-islands/skins/">скины в stylobate-islands</a> — реализация островных стилей.</p>
+  </li>
+</ul>
+
+</div></section>
+<section class="slide shout" id="section-11"><div><h2>Написание кайндов и скинов</h2>
+
+</div></section>
+<section class="slide" id="section-12"><div><h2>Самый простой кайнд</h2>
+
+<pre><code>kind-link($this)</code><code>  cursor: pointer</code><code>  color: blue</code></pre>
+
+<p><code>$this</code> — объект, содержащий распаршенные параметры и всё такое. В базовом случае не особо нужен.</p>
+
+</div></section>
+<section class="slide" id="section-13"><div><h2>Получение цвета</h2>
+
+<pre><code>kind-link($this)</code><code>  cursor: pointer</code><code>  color: <mark>$this.colors[0]</mark> or blue</code></pre>
+
+<p>Параметры группируются по типам: <code>colors</code>, <code>idents</code>, <code>units</code> и т.д.</p>
+
+<p><code>$this.colors[0]</code> — первый переданный в кайнд цвет.</p>
+
+</div></section>
+<section class="slide" id="section-14"><div><h2>Модификаторы</h2>
+
+<pre><code>kind-link<mark>_pseudo</mark>($this)</code><code>  text-decoration: none</code><code>  border-bottom: 1px dotted</code><code> </code><code>kind-link<mark>_underline</mark>($this)</code><code>  text-decoration: underline</code></pre>
+
+</div></section>
+<section class="slide" id="section-15"><div><h2>Дефолты</h2>
+
+<pre><code>kind-link($this)</code><code>  cursor: pointer</code><code>  color: $this.colors[0] or blue</code><code> </code><code>  <mark>stylobate_defaults($this, _underline)</mark></code></pre>
+
+</div></section>
+<section class="slide" id="section-16"><div><h2>Элементы</h2>
+
+<pre><code>skin-islands-arrow-helper($this)</code><code>  pseudo-with-content()</code><code>  </code><code>  // ...</code></pre>
+
+</div></section>
+<section class="slide shout" id="thanks"><div><h2><span class="inner">Спасибо!</span></h2>
+
+<div class="info">
+    <p class="author">Роман Комаров</p>
+    <p class="author">2014</p>
+</div>
+</div></section>
+
+    
+    <div class="progress"><div></div></div>
+    <script src="shower/shower.js"></script>
+    <!-- Copyright © 2014 Роман Комаров — http://kizu.ru/, Яндекс.Почта — https://mail.yandex.ru/ -->
+
+
+
+</body>
+</html>
